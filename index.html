@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculo del Factorial con Aproximación de Stirling</title>
+</head>
+<body>
+    <h1>Factorial y Aproximación de Stirling de 20</h1>
+    <p id="trueValue">Valor Real: </p>
+    <p id="stirlingApprox">Aproximación de Stirling: </p>
+    <p id="error">Error Relativo: </p>
+
+    <script>
+        // Función para calcular el factorial real
+        function factorial(n) {
+            let result = 1;
+            for (let i = 2; i <= n; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
+        // Función para calcular la aproximación de Stirling
+        function stirlingApproximation(n) {
+            const e = Math.E;
+            const pi = Math.PI;
+            return Math.sqrt(2 * pi * n) * Math.pow((n / e), n);
+        }
+
+        const n = 20;
+        const trueVal = factorial(n);
+        const approxVal = stirlingApproximation(n);
+
+        const error = Math.abs((trueVal - approxVal) / trueVal);
+
+        // Mostrando los resultados en la página
+        document.getElementById('trueValue').innerText += trueVal.toLocaleString('en-US');
+        document.getElementById('stirlingApprox').innerText += approxVal.toLocaleString('en-US', {maximumFractionDigits: 2});
+        document.getElementById('error').innerText += (error * 100).toFixed(4) + "%";
+    </script>
+</body>
+</html>
